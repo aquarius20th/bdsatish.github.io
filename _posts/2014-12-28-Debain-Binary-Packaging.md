@@ -1,6 +1,13 @@
 ---
-layout: post
-title: This is my title
+layout: modernist
+title: Debian binary packaging
 ---
 
-Here is my page.
+This is a simple example:
+```shell
+#!/bin/bash  
+git clone html  
+```
+
+This is outside
+
