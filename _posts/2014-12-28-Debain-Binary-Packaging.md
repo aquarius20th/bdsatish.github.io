@@ -116,9 +116,11 @@ See also [this TLDP HOW TO][tldp], [this Ubuntu forum thread][forum],
 FAQs:
 
 1. Why not checkinstall ?
+
 This stupid tool *requires* sudo/root rights, even when you pass ``--install=no`` option.
 
-2. What's wrong with the above approach (``dpkg -b``)?
+2. What's wrong with the above approach (``dpkg -b``) ?
+
 Packages built like this don't contain fields like integrity checks (md5sum, SHA1, SHA256),
 ``Size``/``Installed-Size`` of the files, etc. in the ``control`` file. The packages are
 not GPG-signed. Therefore, these packages cannot be officially included in APT repos.
