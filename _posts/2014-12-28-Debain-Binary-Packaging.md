@@ -1,5 +1,5 @@
 ---
-layout: modernist
+layout: tactile
 title: Creating a binary Debian package
 ---
 
@@ -50,11 +50,18 @@ emacs_24.4-bds1_amd64.deb
 I use the three letter prefix ``bds`` in revision number so that I can identify 
 that it is my package, not the one from stock Debian.
 
+* Compute the checksums of each and every file after ``make install``
+```
+cd $TMPDIR
+find . -type f  -printf '%P\0' | LC_ALL=C sort -z | xargs -r0 md5sum > md5sums
+cd -
+```
 
 * Create a special folder called ``DEBIAN`` and a ``control`` file in it
 ```
 mkdir $TMPDIR/DEBIAN/             # uppercase DEBIAN mandatory
 nano $TMPDIR/DEBIAN/control
+mv $TMPDIR/md5sums $TMPDIR/DEBIAN
 ```
 
 * The contents of the [control file][control], with only the mandatory fields:

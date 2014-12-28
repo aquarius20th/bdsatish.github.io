@@ -1,4 +1,4 @@
 bdsatish.github.io
 ==================
 
-GNUman, the Superhero of Linux
+GNUtron, the Superhero of Linux
