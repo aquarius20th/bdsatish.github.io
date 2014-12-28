@@ -55,7 +55,7 @@ that it is my package, not the one from stock Debian.
 ```
 mkdir $TMPDIR/DEBIAN/
 nano $TMPDIR/DEBIAN/control
-``
+```
 
 * The contents of the [control file][control], with only the mandatory fields:
 ```
