@@ -53,7 +53,7 @@ that it is my package, not the one from stock Debian.
 
 * Create a special folder called ``DEBIAN`` and a ``control`` file in it
 ```
-mkdir $TMPDIR/DEBIAN/
+mkdir $TMPDIR/DEBIAN/             # uppercase DEBIAN mandatory
 nano $TMPDIR/DEBIAN/control
 ```
 
@@ -72,6 +72,18 @@ Description: GNU Emacs 24.4 using GTK 2.x GUI toolkit.
  the paragraph ends, a full stop must be on its own line, like below.
  .
  More optional description can follow here.
+```
+
+* Simple way to get a list of all dependencies is to use ``objdump`` and 
+grep for "NEEDED" flag. Combine with ``dpkg -S`` to see which package provides
+the NEEDED. With some syntactic sugar:
+```
+objdump -p $TMPDIR/usr/local/bin/emacs-24.4 | grep NEEDED | \
+  awk -F ' ' '{print $2}' | xargs dpkg -S | cut -d':' -f 1 | sort | uniq
+```
+You can find runtime dependencies using (not reliable?):
+```
+dpkg-depcheck $TMPDIR/usr/local/bin/emacs-24.4
 ```
 
 * Now build the package. ``dpkg -b`` is a short alias for ``dpkg-deb --build``.
@@ -126,6 +138,9 @@ Packages built like this don't contain fields like integrity checks (md5sum, SHA
 not GPG-signed. Therefore, these packages cannot be officially included in APT repos.
 It is recommended to use ``dh_make`` and ``dpkg-buildpackage`` instead.
 
+Debian packaging has **too many** tools which do somewhat similar tasks. An oveview
+of some commonly used tools is [here][tools]. No wonder Debian packaging is so
+complicated compared to Arch or Fedora.
 
 [wiki]: http://www.emacswiki.org/emacs/EmacsSnapshotAndDebian
 [faq]: https://www.debian.org/doc/manuals/debian-faq/ch-pkg_basics.en.html#s-pkgname
@@ -136,3 +151,4 @@ It is recommended to use ``dh_make`` and ``dpkg-buildpackage`` instead.
 [tldp]: http://tldp.org/HOWTO/html_single/Debian-Binary-Package-Building-HOWTO/
 [conf]: http://www.electricmonk.nl/log/2011/09/06/creating-simple-debian-packages/
 [hardening]: https://wiki.debian.org/Hardening
+[tools]: https://www.debian.org/doc/manuals/developers-reference/tools
