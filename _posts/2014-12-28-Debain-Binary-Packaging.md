@@ -138,6 +138,10 @@ Packages built like this don't contain fields like integrity checks (md5sum, SHA
 not GPG-signed. Therefore, these packages cannot be officially included in APT repos.
 It is recommended to use ``dh_make`` and ``dpkg-buildpackage`` instead.
 
+3. Building in a chroot'ed environment ?
+You'll come across ``pbuilder`` and ``sbuild``. Go with ``sbuild`` because that is
+what is officially used by Debian and Ubuntu. A [comparative quick guide][so].
+
 Debian packaging has **too many** tools which do somewhat similar tasks. An oveview
 of some commonly used tools is [here][tools]. No wonder Debian packaging is so
 complicated compared to Arch or Fedora.
@@ -152,3 +156,4 @@ complicated compared to Arch or Fedora.
 [conf]: http://www.electricmonk.nl/log/2011/09/06/creating-simple-debian-packages/
 [hardening]: https://wiki.debian.org/Hardening
 [tools]: https://www.debian.org/doc/manuals/developers-reference/tools
+[so]: http://askubuntu.com/a/199184
